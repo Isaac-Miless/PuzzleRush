@@ -1,0 +1,41 @@
+# Dependencies
+node_modules/
+
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Build outputs
+dist/
+build/
+.out/
+
+# Vite
+node_modules/.vite
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor folders
+.vscode/
+.idea/
+
+# Coverage
+coverage/
+
+# Temporary files
+tmp/
+temp/
+
+# Docker
+*.pid
+
+# Misc
+*.local
