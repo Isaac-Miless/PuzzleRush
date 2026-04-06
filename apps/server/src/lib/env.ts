@@ -10,6 +10,10 @@
  * @author Isaac Miles
  */
 
+import dotenv from "dotenv";
+
+dotenv.config();
+
 function requireEnv(name: string): string
 {
     // Grab the ENV value of the given identifier
@@ -18,7 +22,7 @@ function requireEnv(name: string): string
     // If the given identifier does not exist, return an err
     if (!value)
     {
-        throw new Error('Missing environment variable: ${name}');
+        throw new Error(`Missing environment variable: ${name}`);
     }
 
     // If it does exist, simply return

@@ -1,9 +1,12 @@
 import { useEffect, useState } from "react";
-import { getHealth } from "./services/api";
+import { getHealth, runSupabaseTest } from "./services/api";
 
 function App() {
   const [message, setMessage] = useState<string>("Loading...");
   const [status, setStatus] = useState<string>("");
+
+  const [dbStatus, setDbStatus] = useState<string>(""); // new
+  const [dbError, setDbError] = useState<string>(""); // new
 
   useEffect(() => {
     const loadHealth = async () => {
@@ -21,11 +24,31 @@ function App() {
     void loadHealth();
   }, []);
 
+  const handleSupabaseTest = async () => {
+    try {
+      const data = await runSupabaseTest();
+      setDbStatus(data.success ? "ok" : "failed");
+      setDbError(data.error || "");
+    } catch (error) {
+      console.error(error);
+      setDbStatus("error");
+      setDbError("Request failed");
+    }
+  };
+
   return (
     <main>
       <h1>Puzzle Platform</h1>
+
       <p>Backend message: {message}</p>
       <p>Status: {status}</p>
+
+      <hr />
+
+      <button onClick={handleSupabaseTest}>Run Supabase Test</button>
+
+      <p>DB Status: {dbStatus}</p>
+      {dbError && <p>Error: {dbError}</p>}
     </main>
   );
 }
